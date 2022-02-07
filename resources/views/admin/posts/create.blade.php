@@ -41,10 +41,11 @@
         </div>
       @enderror
     </div>
+
     <div class="mb-3">
       <label for="category_id" class="form-label">Categoria</label>
       <select name="category_id" id="category_id" class="form-control">
-        <option>Seleziona la categoria</option>
+        <option value="">Seleziona la categoria</option>
         @foreach ($categories as $category)
           <option @if ($category->id == old('category_id')) selected @endif value="{{$category->id}}">
             {{$category->name}}
@@ -52,6 +53,22 @@
         @endforeach
 
       </select>
+    </div>
+
+    <div class="mb-3">
+      <h5>Tags</h5>
+      @foreach ($tags as $tag)
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" 
+          name="tags[]" id="tag{{ $loop->iteration }}" value="{{ $tag->id }}"
+          @if(in_array($tag->id, old('tags', []))) checked @endif>
+          
+          <label class="form-check-label" for="tag{{ $loop->iteration }}">
+            {{ $tag->name }}
+          </label>
+        </div>
+      @endforeach
+ 
     </div>
 
     <button type="submit" class="btn btn-success">CREA</button>

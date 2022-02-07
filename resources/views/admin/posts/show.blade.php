@@ -3,9 +3,17 @@
 @section('content')
 <div class="container">
   <h1>{{$post->title}}</h1>
+
   @if ($post->category)
     <h4>Categoria: {{$post->category->name}}</h4>
   @endif
+
+  @forelse ($post->tags as $tag)
+    <span class="badge bg-primary text-light">{{ $tag->name }}</span>
+  @empty
+    -
+  @endforelse
+
   <p>{{$post->content}}</p>
 
   <div class="row">
@@ -18,6 +26,7 @@
     </form>
 
   </div>
+  <a href="{{ route('admin.posts.index') }}">Torna all'elenco</a>
 </div>
 @endsection
 
